@@ -6,8 +6,9 @@ module Sitemap
       refute_nil ::Sitemap::Ping::VERSION
     end
 
-    def test_it_does_something_useful
-      assert false
+    def test_it_is_initializable
+      x = Sitemap::PingTask.new(:ping)
+      refute_nil x
     end
   end
 end

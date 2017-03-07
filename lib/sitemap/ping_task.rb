@@ -24,9 +24,15 @@ module Sitemap
       @engines = [:google, :bing]
       @description = 'Inform search engines of updated sitemap contents'
       @deps = []
-      @sitemap_url = YAML.load_file('_config.yml')['url'] + '/sitemap.xml'
+      @sitemap_url = try_jekyll_config
       yield self if block_given?
       define
+    end
+
+    def try_jekyll_config
+      YAML.load_file('_config.yml')['url'] + '/sitemap.xml'
+    rescue SystemCallError
+      ''
     end
 
     def define
@@ -34,14 +40,14 @@ module Sitemap
         desc @description
         task @name => Array(@deps) do
           ENGINE_PING_BASEURLS.each do |k, v|
-            ping_sitemap(v, @sitemap_url) if @engines.include?(k)
+            ping_sitemap(v) if @engines.include?(k)
           end
         end
       end
     end
 
-    def ping_sitemap(engine_url, sitemap_url)
-      uri = URI(engine_url + sitemap_url)
+    def ping_sitemap(engine_url)
+      uri = URI(engine_url + @sitemap_url)
 
       resp = Net::HTTP.get_response(uri)
       puts "#{resp.message}: #{uri}"
