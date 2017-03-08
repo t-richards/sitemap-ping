@@ -4,21 +4,26 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'sitemap/ping/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'sitemap-ping'
-  spec.version       = Sitemap::Ping::VERSION
-  spec.authors       = ['Tom Richards']
-  spec.email         = ['tom@tomrichards.net']
+  spec.name = 'sitemap-ping'
+  spec.version = Sitemap::Ping::VERSION
+  spec.authors = ['Tom Richards']
+  spec.email = ['tom@tomrichards.net']
 
-  spec.summary       = 'TODO: Write a short summary, it is required.'
-  spec.description   = 'TODO: Write a longer description or delete this line.'
-  spec.homepage      = 'https://github.com/t-richards/sitemap-ping'
-  spec.license       = 'MIT'
+  spec.summary = 'A library to inform search engines of sitemap updates.'
+  spec.description = <<-DESCRIPTION
+This gem provides an idiomatic library for notifying search engines of sitemap
+updates, as well as a reusable rake task for easy inclusion into existing
+projects.
+  DESCRIPTION
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+  spec.homepage = 'https://github.com/t-richards/sitemap-ping'
+  spec.license = 'MIT'
+
+  spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
-  spec.bindir        = 'exe'
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.bindir = 'exe'
+  spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.14'

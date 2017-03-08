@@ -1,15 +1,6 @@
-require 'net/http'
 require 'rake'
 require 'rake/tasklib'
-require 'uri'
 require 'yaml'
-
-require 'sitemap/ping/version'
-
-ENGINE_PING_BASEURLS = {
-  google: 'https://www.google.com/webmasters/sitemaps/ping?sitemap=',
-  bing: 'https://www.bing.com/webmaster/ping.aspx?siteMap='
-}.freeze
 
 module Sitemap
   # Rake task for initiating search engine sitmap "ping"s
@@ -32,25 +23,20 @@ module Sitemap
     def try_jekyll_config
       YAML.load_file('_config.yml')['url'] + '/sitemap.xml'
     rescue SystemCallError
-      ''
+      nil
     end
 
     def define
+      raise Sitemap::UrlError if @sitemap_url.nil?
+
       namespace :sitemap do
         desc @description
         task @name => Array(@deps) do
-          ENGINE_PING_BASEURLS.each do |k, v|
-            ping_sitemap(v) if @engines.include?(k)
+          @engines.each do |e|
+            Sitemap::Ping.ping_sitemap(e, @sitemap_url)
           end
         end
       end
-    end
-
-    def ping_sitemap(engine_url)
-      uri = URI(engine_url + @sitemap_url)
-
-      resp = Net::HTTP.get_response(uri)
-      puts "#{resp.message}: #{uri}"
     end
   end
 end
