@@ -9,6 +9,7 @@ module Sitemap
   # Rake task for initiating search engine sitmap "ping"s
   class PingTask < Rake::TaskLib
     attr_accessor :name
+    attr_accessor :deps
     attr_accessor :engines
     attr_accessor :description
     attr_accessor :sitemap_url
