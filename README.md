@@ -1,5 +1,7 @@
 # sitemap-ping
 
+[![Build Status](https://travis-ci.org/t-richards/sitemap-ping.svg?branch=master)](https://travis-ci.org/t-richards/sitemap-ping)
+
 This library and rake task enables you to easily inform search engines when
 you update your `sitemap.xml`.
 
