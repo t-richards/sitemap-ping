@@ -1,5 +1,6 @@
 require 'rake'
 require 'rake/tasklib'
+require 'uri'
 require 'yaml'
 
 require 'sitemap/ping'
@@ -23,7 +24,8 @@ module Sitemap
     end
 
     def try_jekyll_config
-      YAML.load_file('_config.yml')['url'] + '/sitemap.xml'
+      config = YAML.load_file('_config.yml')
+      URI.join(config['url'], config['baseurl'], '/sitemap.xml').to_s
     rescue SystemCallError
       nil
     end
