@@ -2,6 +2,8 @@ require 'rake'
 require 'rake/tasklib'
 require 'yaml'
 
+require 'sitemap/ping'
+
 module Sitemap
   # Rake task for initiating search engine sitmap "ping"s
   class PingTask < Rake::TaskLib
