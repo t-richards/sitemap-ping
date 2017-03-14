@@ -4,6 +4,7 @@ require 'uri'
 require 'yaml'
 
 require 'sitemap/ping'
+require 'sitemap/url_error'
 
 module Sitemap
   # Rake task for initiating search engine sitmap "ping"s
@@ -32,11 +33,10 @@ module Sitemap
     end
 
     def define
-      raise Sitemap::UrlError if @sitemap_url.nil?
-
       namespace :sitemap do
         desc @description
         task @name => Array(@deps) do
+          raise Sitemap::UrlError if @sitemap_url.nil?
           @engines.each do |e|
             Sitemap::Ping.ping_sitemap(e, @sitemap_url)
           end
