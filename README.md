@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/t-richards/sitemap-ping.svg?branch=master)](https://travis-ci.org/t-richards/sitemap-ping)
 
-This library and rake task enables you to easily inform search engines when
-you update your `sitemap.xml`.
+This library and rake task enables you to easily inform search engines when you
+update your `sitemap.xml`.
 
 ## Installation
 
@@ -55,7 +55,7 @@ require 'sitemap/ping_task'
 
 Sitemap::PingTask.new(:myping) do |pt|
   pt.description = 'My custom task description'
-  pt.engines = [:google] # Valid options are :google or :bing
+  pt.engines = [:google] # Valid options are :google and/or :bing
   pt.sitemap_url = 'https://example.com/custom-sitemap.xml' # Override auto-detection from _config.yml
 end
 ```
