@@ -1,6 +1,8 @@
 # sitemap-ping
 
 [![Build Status](https://travis-ci.org/t-richards/sitemap-ping.svg?branch=master)](https://travis-ci.org/t-richards/sitemap-ping)
+[![Inline docs](http://inch-ci.org/github/t-richards/sitemap-ping.svg?branch=master)](http://inch-ci.org/github/t-richards/sitemap-ping)
+[![Gem](https://img.shields.io/gem/v/sitemap-ping.svg)](https://rubygems.org/gems/sitemap-ping)
 
 This library and rake task enables you to easily inform search engines when you
 update your `sitemap.xml`.
@@ -72,12 +74,6 @@ $ bin/rake test
 # Open an interactive prompt that will allow you to experiment.
 $ bin/console
 ```
-
-To install this gem onto your local machine, run `bin/rake install`. To
-release a new version, update the version number in `version.rb`, and then run
-`bin/rake release`, which will create a git tag for the version, push
-git commits and tags, and push the `.gem` file to
-[rubygems.org](https://rubygems.org).
 
 ## Contributing
 
