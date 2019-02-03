@@ -19,15 +19,13 @@ module Sitemap
   module Ping
     module_function
 
+    # Constructs a query string with parameter names based on the search engine.
     def sitemap_params(engine, sitemap_url)
-      case engine
-      when :google
-        URI.encode_www_form('sitemap' => sitemap_url)
-      when :bing
-        URI.encode_www_form('siteMap' => sitemap_url)
-      else
-        raise EngineError.new, "Invalid engine #{engine} specified"
+      if engine == :bing
+        return URI.encode_www_form('siteMap' => sitemap_url)
       end
+
+      URI.encode_www_form('sitemap' => sitemap_url)
     end
 
     # Pings the specified +engine+ to request an update of your site's
@@ -41,6 +39,10 @@ module Sitemap
     #  ping_sitemap(:bing, "https://example.com/another_sitemap.xml")
     #  # => #<Net::HTTPOK 200 OK readbody=true>
     def ping_sitemap(engine, sitemap_url)
+      if ENGINE_BASEURLS[engine].nil?
+        raise EngineError.new, "Invalid engine #{engine} specified"
+      end
+
       full_url = ENGINE_BASEURLS[engine] + sitemap_params(engine, sitemap_url)
       Net::HTTP.get_response(URI(full_url))
     end

@@ -27,12 +27,12 @@ module Sitemap
     attr_accessor :sitemap_url
 
     # Default constructor for this task. See +README.md+ for usage instructions.
-    def initialize(name = :ping)
+    def initialize(name = :ping, sitemap_url = nil)
       @name = name
       @engines = %i[google bing]
       @description = 'Inform search engines of updated sitemap contents'
       @deps = []
-      @sitemap_url = try_jekyll_config
+      @sitemap_url = sitemap_url || try_jekyll_config
       yield self if block_given?
       define
     end
