@@ -1,8 +1,8 @@
 # sitemap-ping
 
-[![Build Status](https://travis-ci.org/t-richards/sitemap-ping.svg?branch=master)](https://travis-ci.org/t-richards/sitemap-ping)
-[![Inline docs](http://inch-ci.org/github/t-richards/sitemap-ping.svg?branch=master)](http://inch-ci.org/github/t-richards/sitemap-ping)
-[![Gem](https://img.shields.io/gem/v/sitemap-ping.svg)](https://rubygems.org/gems/sitemap-ping)
+[![CircleCI Build Status](https://img.shields.io/circleci/project/github/t-richards/sitemap-ping/master.svg?style=flat-square)](https://circleci.com/gh/t-richards/sitemap-ping/)
+[![Inline docs](https://inch-ci.org/github/t-richards/sitemap-ping.svg?branch=master&style=flat-square)](http://inch-ci.org/github/t-richards/sitemap-ping)
+[![Gem Version](https://img.shields.io/gem/v/sitemap-ping.svg?style=flat-square)](https://rubygems.org/gems/sitemap-ping)
 
 This library and rake task enables you to easily inform search engines when you
 update your `sitemap.xml`.
