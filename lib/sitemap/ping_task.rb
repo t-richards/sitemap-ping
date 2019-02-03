@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake'
 require 'rake/tasklib'
 require 'uri'
@@ -24,10 +26,10 @@ module Sitemap
     # The URL of the sitemap which will be sent to each search engine.
     attr_accessor :sitemap_url
 
-    # Default constructor for this task. See the +README.md+ for usage instructions.
+    # Default constructor for this task. See +README.md+ for usage instructions.
     def initialize(name = :ping)
       @name = name
-      @engines = [:google, :bing]
+      @engines = %i[google bing]
       @description = 'Inform search engines of updated sitemap contents'
       @deps = []
       @sitemap_url = try_jekyll_config
@@ -48,7 +50,8 @@ module Sitemap
       namespace :sitemap do
         desc @description
         task @name => Array(@deps) do
-          raise Sitemap::UrlError if @sitemap_url.nil?
+          raise Sitemap::UrlError, 'Missing sitemap URL' if @sitemap_url.nil?
+
           @engines.each do |e|
             result = Sitemap::Ping.ping_sitemap(e, @sitemap_url)
             puts "#{result.message}: #{result.uri}"

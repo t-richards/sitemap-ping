@@ -1,0 +1,14 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Include:
+    - '*.gemspec'
+    - '**/*.rb'
+    - Gemfile
+    - Rakefile
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - test/**/*

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 require 'sitemap/ping/version'
 
@@ -9,13 +11,24 @@ module Sitemap
   #   ENGINE_BASEURLS[:google]
   #   # => "https://www.google.com/webmasters/sitemaps/ping?sitemap="
   ENGINE_BASEURLS = {
-    google: 'https://www.google.com/webmasters/sitemaps/ping?sitemap=',
-    bing: 'https://www.bing.com/webmaster/ping.aspx?siteMap=',
+    google: 'https://www.google.com/webmasters/sitemaps/ping?',
+    bing: 'https://www.bing.com/webmaster/ping.aspx?'
   }.freeze
 
   # Utility for sending "ping" update requests over the network
   module Ping
     module_function
+
+    def sitemap_params(engine, sitemap_url)
+      case engine
+      when :google
+        URI.encode_www_form('sitemap' => sitemap_url)
+      when :bing
+        URI.encode_www_form('siteMap' => sitemap_url)
+      else
+        raise EngineError.new, "Invalid engine #{engine} specified"
+      end
+    end
 
     # Pings the specified +engine+ to request an update of your site's
     # +sitemap_url+. Valid values for +engine+ include <tt>:google</tt> and
@@ -28,8 +41,8 @@ module Sitemap
     #  ping_sitemap(:bing, "https://example.com/another_sitemap.xml")
     #  # => #<Net::HTTPOK 200 OK readbody=true>
     def ping_sitemap(engine, sitemap_url)
-      uri = URI(ENGINE_BASEURLS[engine] + sitemap_url)
-      Net::HTTP.get_response(uri)
+      full_url = ENGINE_BASEURLS[engine] + sitemap_params(engine, sitemap_url)
+      Net::HTTP.get_response(URI(full_url))
     end
   end
 end
