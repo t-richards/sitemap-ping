@@ -21,9 +21,7 @@ module Sitemap
 
     # Constructs a query string with parameter names based on the search engine.
     def sitemap_params(engine, sitemap_url)
-      if engine == :bing
-        return URI.encode_www_form('siteMap' => sitemap_url)
-      end
+      return URI.encode_www_form('siteMap' => sitemap_url) if engine == :bing
 
       URI.encode_www_form('sitemap' => sitemap_url)
     end

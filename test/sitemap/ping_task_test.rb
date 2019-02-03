@@ -24,8 +24,8 @@ module Sitemap
     end
 
     def test_it_is_initializable_with_sitemap
-      result = Sitemap::PingTask.new(:ping, "foo.xml")
-      assert_equal(result.sitemap_url, "foo.xml")
+      result = Sitemap::PingTask.new(:ping, 'foo.xml')
+      assert_equal(result.sitemap_url, 'foo.xml')
     end
   end
 end
